@@ -48,8 +48,20 @@ const getUserLogs = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  console.log("Get all users");
+  try {
+    const getAllUsers = await trackerService.getAllUsers();
+    res.json(getAllUsers);
+  } catch (error) {
+    console.error("Error getting all users:", error.message);
+    res.status.json({ error: error.message });
+  }
+}
+
 module.exports = {
   newUser,
   addExercises,
   getUserLogs,
+  getAllUsers,
 };

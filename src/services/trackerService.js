@@ -58,9 +58,19 @@ function getUserLogs(_id, from, to, limit) {
   };
 }
 
+function getAllUsers() {
+  return users.map(user => {
+    return {
+      _id: user._id,
+      username: user.username
+    };
+  });
+}
+
 module.exports = {
   createNewUser,
   addExercises,
   getUserLogs,
-  getUserById
+  getUserById,
+  getAllUsers
 };
