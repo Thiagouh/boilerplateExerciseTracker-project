@@ -16,7 +16,7 @@ function addExercises(_id, description, duration, date) {
   if (user) {
     const newExercise = {
       description: description,
-      duration: duration,
+      duration: Number(duration),
       date: date || new Date().toISOString().split("T")[0],
     };
     user.log.push(newExercise);
