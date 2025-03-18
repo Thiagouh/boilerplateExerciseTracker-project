@@ -51,9 +51,9 @@ function getUserLogs(_id, from, to, limit) {
   }
 
   return {
-    _id: user._id,
     username: user.username,
     count: logs.length,
+    _id: user._id,
     log: logs
   };
 }

@@ -23,11 +23,11 @@ const addExercises = async (req, res) => {
     const exercise = await trackerService.addExercises(_id, description, duration, date);
     const user = await trackerService.getUserById(_id);
     res.json({
-      _id: user._id,
       username: user.username,
-      date: new Date(exercise.date).toDateString(),
+      description: exercise.description,
       duration: exercise.duration,
-      description: exercise.description
+      date: new Date(exercise.date).toDateString(),
+      _id: user._id,
     });
   } catch (error) {
     console.error("Error adding exercises:", error.message)
