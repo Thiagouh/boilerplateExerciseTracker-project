@@ -50,11 +50,16 @@ function getUserLogs(_id, from, to, limit) {
     logs = logs.slice(0, limit);
   }
 
+  const formattedLogs = logs.map(log => ({
+    ...log,
+    date: new Date(log.date).toDateString()
+  }));
+
   return {
     username: user.username,
     count: logs.length,
     _id: user._id,
-    log: logs
+    log: formattedLogs
   };
 }
 
