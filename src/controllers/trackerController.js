@@ -2,6 +2,7 @@ const trackerService = require('../services/trackerService');
 
 const newUser = async (req, res) => {
   const { username } = req.body;
+  console.log("Create new user:", username);
   try {
     const user = await trackerService.createNewUser(username);
     res.json({
@@ -9,6 +10,7 @@ const newUser = async (req, res) => {
       _id: user._id
     });
   } catch (error) {
+    console.error("Error creating new user:", error.message);	
     res.status(500).json({ error: error.message });
   }
 };
@@ -16,6 +18,7 @@ const newUser = async (req, res) => {
 const addExercises = async (req, res) => {
   const { _id } = req.params;
   const { description, duration, date } = req.body;
+  console.log("Add exercises:", description, duration, date);
   try {
     const exercise = await trackerService.addExercises(_id, description, duration, date);
     const user = await trackerService.getUserById(_id);
@@ -27,6 +30,7 @@ const addExercises = async (req, res) => {
       description: exercise.description
     });
   } catch (error) {
+    console.error("Error adding exercises:", error.message)
     res.status(500).json({ error: error.message });
   }
 };
@@ -34,10 +38,12 @@ const addExercises = async (req, res) => {
 const getUserLogs = async (req, res) => {
   const { _id } = req.params;
   const { from, to, limit } = req.query;
+  console.log("Get user logs:", _id, from, to, limit);
   try {
     const logs = await trackerService.getUserLogs(_id, from, to, limit);
     res.json(logs);
   } catch (error) {
+    console.error("Error getting user logs:", error.message);
     res.status(500).json({ error: error.message });
   }
 };
